@@ -1,0 +1,6 @@
+{
+  "name": "ReferralHub",
+  "description": "A platform to generate referral links, track clicks, and reward users for conversions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

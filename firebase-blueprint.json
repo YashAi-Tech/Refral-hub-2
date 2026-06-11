@@ -1,0 +1,55 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with referral stats",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "email": { "type": "string", "description": "User email address" },
+        "referralCode": { "type": "string", "description": "Unique referral code generated for the user" },
+        "clicks": { "type": "number", "description": "Total clicks on user's referral link" },
+        "conversions": { "type": "number", "description": "Total successful signups via user's link" },
+        "rewards": { "type": "number", "description": "Total rewards earned" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the user account was created" }
+      },
+      "required": ["uid", "email", "referralCode", "clicks", "conversions", "rewards", "createdAt"]
+    },
+    "Referral": {
+      "title": "Referral",
+      "description": "A successful referral event",
+      "type": "object",
+      "properties": {
+        "referrerUid": { "type": "string", "description": "UID of the user who referred" },
+        "referredUid": { "type": "string", "description": "UID of the new user" },
+        "timestamp": { "type": "string", "format": "date-time", "description": "When the referral occurred" }
+      },
+      "required": ["referrerUid", "referredUid", "timestamp"]
+    },
+    "Click": {
+      "title": "Click",
+      "description": "A click event on a referral link",
+      "type": "object",
+      "properties": {
+        "referrerUid": { "type": "string", "description": "UID of the referrer" },
+        "timestamp": { "type": "string", "format": "date-time", "description": "When the click occurred" },
+        "userAgent": { "type": "string", "description": "User's browser info" }
+      },
+      "required": ["referrerUid", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles and referral statistics"
+    },
+    "/referrals/{referralId}": {
+      "schema": "Referral",
+      "description": "Record of successful sign-up conversions"
+    },
+    "/clicks/{clickId}": {
+      "schema": "Click",
+      "description": "Log of every click on a referral link"
+    }
+  }
+}
