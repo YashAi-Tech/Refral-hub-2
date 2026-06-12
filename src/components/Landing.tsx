@@ -3,7 +3,7 @@ import { LogIn, Users, TrendingUp, Zap } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
 export function Landing() {
-  const { signIn, isSigningIn, error, clearError } = useAuth();
+  const { signIn, signInRedirect, isSigningIn, error, clearError } = useAuth();
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
@@ -45,7 +45,7 @@ export function Landing() {
           <button
             onClick={signIn}
             disabled={isSigningIn}
-            className="flex items-center gap-3 bg-white text-slate-900 px-8 py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all border border-slate-200 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:scale-100 disabled:cursor-not-allowed"
+            className="flex items-center gap-3 bg-white text-slate-900 px-8 py-4 rounded-2xl font-bold shadow-lg hover:shadow-xl transition-all border border-slate-200 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:scale-100 disabled:cursor-not-allowed w-full sm:w-auto justify-center"
           >
             {isSigningIn ? (
               <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-slate-900"></div>
@@ -54,6 +54,10 @@ export function Landing() {
             )}
             {isSigningIn ? 'Connecting...' : 'Get Started with Google'}
           </button>
+
+          <p className="mt-4 text-xs text-slate-400">
+            Having trouble? <button onClick={signInRedirect} className="text-blue-500 hover:underline">Try redirect login</button>
+          </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-24 max-w-5xl mx-auto">
