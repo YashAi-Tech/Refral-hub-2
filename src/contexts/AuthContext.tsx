@@ -164,8 +164,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setError('Multiple sign-in attempts detected. Please wait.');
       } else if (err.code === 'auth/popup-closed-by-user') {
         // Safe to ignore
-      } else if (err.code === 'auth/network-request-failed') {
-        setError('Network error. Check connection and authorized domains.');
+      } else if (err.code === 'auth/network-request-failed' || err.code === 'auth/unauthorized-domain' || err.message?.includes('authorized domains')) {
+        setError(`This domain (${window.location.hostname}) is not authorized in Firebase. Please add it to "Authorized domains" in your Firebase console under Auth > Settings.`);
       } else if (err.code === 'auth/popup-blocked') {
         setError('Popup was blocked by your browser. Please allow popups for this site.');
       } else if (err.code === 'auth/operation-not-allowed') {

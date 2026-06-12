@@ -35,10 +35,22 @@ export function Landing() {
             <motion.div 
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="absolute -top-16 left-0 right-0 bg-red-50 text-red-600 text-sm p-3 rounded-lg border border-red-100 flex items-center justify-between gap-2"
+              className="absolute -top-32 left-0 right-0 bg-red-50 text-red-600 text-sm p-4 rounded-xl border border-red-100 shadow-sm z-50 overflow-hidden"
             >
-              <span>{error}</span>
-              <button onClick={clearError} className="p-1 hover:bg-red-100 rounded">×</button>
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex-1">
+                  <p className="font-bold mb-1">Authentication Error</p>
+                  <p className="text-xs leading-relaxed opacity-90">
+                    {error}
+                  </p>
+                  {error.includes('authorized domains') || error.includes('network-request-failed') ? (
+                    <p className="mt-2 text-[10px] font-medium bg-red-100/50 p-2 rounded border border-red-200">
+                      💡 <b>Tip for Developer:</b> Ensure <code>{window.location.hostname}</code> is added to the <b>"Authorized domains"</b> list in your Firebase Console (Auth &gt; Settings).
+                    </p>
+                  ) : null}
+                </div>
+                <button onClick={clearError} className="p-1 hover:bg-red-100 rounded-lg transition-colors h-6 w-6 flex items-center justify-center font-bold">×</button>
+              </div>
             </motion.div>
           )}
 
